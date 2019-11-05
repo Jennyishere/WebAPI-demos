@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        td,
+        th
+         {
+            border: 1px solid #000;
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table cellspacing="0">
+            <thead>
+                    <th>姓名</th>
+                    <th>科目</th>
+                    <th>成绩</th>
+                    <th>操作</th>
+                </thead>
+                <tbody>
+            
+                </tbody>
+    </table>
+</body>
+<script>
+    // 准备数据
+    var dadas = [{
+        name:'Mary',
+        subject: 'java',
+        score: 100
+    },
+    {
+        name:'Jane',
+        subject: 'java',
+        score: 95
+    },
+    {
+        name:'Ann',
+        subject: 'java',
+        score: 90
+    },
+    {
+        name:'Tom',
+        subject: 'java',
+        score: 80
+    }]
+    var tbody = document.querySelector('tbody');
+    for (var i = 0; i < dadas.length; i++) {
+    var tr = document.createElement('tr');
+    tbody.appendChild(tr);
+    for (var k in dadas[i]) {
+        // console.log(dadas[i][k]);
+        
+    var td = document.createElement('td');
+        tr.appendChild(td);
+        td.innerHTML = dadas[i][k];
+    }
+    var td = document.createElement('td');
+        tr.appendChild(td);
+        td.innerHTML = '<a href= "javascript:;">删除</a>'
+    }
+    var as = document.querySelectorAll('a');
+    console.log(as);
+    
+    for (i = 0; i < as.length; i++) {
+        as[i].onclick = function() {
+        tbody.removeChild(this.parentNode.parentNode);
+    }
+    }
+</script>
+</html>
