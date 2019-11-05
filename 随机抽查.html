@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <select name="" id="">
+            <option value="">一等奖</option>
+            <option value="">二等奖</option>
+            <option value="">三等奖</option>
+            <option value="">四等奖</option>
+            <option value="">五等奖</option>
+            <option value="">六等奖</option>
+            <option value="">七等奖</option>
+            <option value="">八等奖</option>
+        </select>
+        <input type="button" value="抽奖">
+    </div>
+</body>
+<script>
+    var box = document.querySelector('#box');
+    var options = box.querySelectorAll('option');
+    var btn = box.querySelector('input');
+    btn.onclick = function() {
+        var index = Math.floor(Math.random()*options.length);
+        console.log(index);
+        options[index].selected = true;
+    }
+</script>
+</html>
