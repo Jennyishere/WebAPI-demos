@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style: none;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button>自动生成</button>
+    </div>
+    <script>
+      var list = ["华为", "苹果", "魅族", "小米", "华为", "华为"];
+      var box = document.querySelector("div");
+      var btn = box.querySelector("button");
+      btn.onclick = function() {
+        var ul = document.createElement("ul");
+        box.appendChild(ul);
+        for (i = 0; i < list.length; i++) {
+          var li = document.createElement("li");
+          li.innerHTML = list[i];
+          ul.appendChild(li);
+          if (i % 2 == 0) {
+            li.style.backgroundColor = "#ccc";
+          } else {
+            li.style.backgroundColor = "#666";
+          }
+          var bg;
+          li.onmouseover = function() {
+              bg = this.style.backgroundColor;
+            this.style.backgroundColor = "#f90";
+          };
+          li.onmouseout = function() {
+              this.style.backgroundColor = bg;
+          }
+        }
+        var boxChildren = box.children;
+        console.log(boxChildren);
+        
+        if (boxChildren.length > 2) {
+          box.removeChild(box.children[1]);
+          box.removeChild(box.children[1]);
+        // box.removeChild(ul);
+        }
+      };
+    </script>
+  </body>
+</html>
