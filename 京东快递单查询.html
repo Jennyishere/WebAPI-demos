@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>京东</title>
+    <style>
+        .box {
+            position: relative;
+        }
+        .con {
+            display: none;
+            position: absolute;
+            margin-bottom: 8px;
+            width: 170px;
+            height: 28px;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 3px 2px rgba(0, 0, 0, .3);
+        }
+        .con::before {
+            width: 0;
+            height: 0;
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 14px;
+            border: 8px solid #000;
+            border-color: #fff transparent transparent;
+        }
+        input {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="con"></div>
+        <input type="text">
+    </div>
+</body>
+<script>
+    var con = document.querySelector('.con');
+    var input = document.querySelector('input');
+    input.addEventListener('keyup', function() {
+        // alert('123');
+        
+        if(this.value == '') {
+            con.style.display = 'none';
+        }else {
+            con.style.display = 'block';
+            con.innerText = this.value;
+        }
+    })
+
+   
+</script>
+</html>/
