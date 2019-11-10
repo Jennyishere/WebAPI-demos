@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="tel" name="" id="">
+    <button>发送短信</button>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var time = 60;
+    btn.onclick = function () {
+        this.disabled = true;
+        var timer = setInterval(function(){
+            // var time = 6;不能放在函数内 不然执行完time--会跳回6
+           if(time == 0){
+            clearInterval(timer); //停止定时
+            btn.innerHTML = '发送短信';
+            btn.disabled = false; //恢复按钮
+           }else {
+            btn.innerHTML = '剩余' + time + '秒';
+            //减少
+            time--;
+           }
+        },1000);
+    }
+</script>
+</html>
