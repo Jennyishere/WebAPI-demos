@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    var div = document.querySelector('div');
+    var time = 5;
+    setInterval(function(){
+        if(time == 0) {
+            location.href = './tab栏的切换.html';
+        }else {
+            div.innerHTML = '页面将在' + time + '秒后跳转';
+        time--;
+        }
+    }, 1000);
+</script>
+</html>
