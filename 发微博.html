@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        textarea {
+            resize: none;
+        }
+        button {
+            background-color: #f90;
+            border: 0;
+            color: #fff;
+        }
+        ul {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            list-style: none;
+        }
+        ul li a {
+            margin-right: 20px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+   <textarea name="" id="" cols="30" rows="10"></textarea> 
+   <button>发布微博</button>
+   <ul>
+       <li>老的li <a href="javascript:;">删除</a></li>
+   </ul>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var text = document.querySelector('textarea');
+    var ul = document.querySelector('ul');
+    btn.onclick = function() {
+       if(text.value == '') {
+        //    alert('请输入内容');
+            btn.disabled;
+           return;
+       }else {
+        var li = document.createElement('li');
+        li.innerHTML = text.value + '<a href="javascript:;">删除</a>';
+        // ul.appendChild(li);
+        ul.insertBefore(li,ul.children[0]);
+        text.value = '';
+       }
+        
+    
+    var as = document.querySelectorAll('ul a');
+    console.log(as);
+    
+    for(let i = 0; i < as.length; i ++) {
+        as[i].onclick = function() {
+            ul.removeChild(this.parentNode);
+}
+    }
+}
+</script>
+</html>
