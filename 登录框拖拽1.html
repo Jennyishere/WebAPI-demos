@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translate(-50%);
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        width: 400px;
+        height: 200px;
+        text-align: center;
+      }
+      .box p {
+        margin: 20px 0;
+      }
+      .box h1 {
+        cursor: move;
+      }
+      .box button {
+        cursor: pointer;
+        border: 1px solid #ccc;
+        width: 100px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>登录会员</h1>
+      <p>用户名：<input type="text" /></p>
+      <p>密码： <input type="password" /></p>
+      <button>登录会员</button>
+    </div>
+  </body>
+  <script>
+    //       1 鼠标按下
+    //           告诉浏览器，这个元素可以被拖动了
+    //       2 鼠标移动
+    //           如果鼠标是按下的，就让这个元素跟着鼠标一起移动
+    //       3 鼠标弹起
+    //           告诉浏览器，这个元素不可以被拖动了
+
+    var h1 = document.querySelector("h1");
+    var box = document.querySelector(".box");
+    console.log(h1);
+
+    // 选取标题部分作为可移动区域 注册鼠标按下事件
+    h1.addEventListener('mousedown', function(e){
+
+      var x = e.pageX - box.offsetLeft;
+      var y = e.pageY - box.offsetTop;
+      // 2给文档注册鼠标移动事件
+
+      document.addEventListener('mousemove', move)
+      
+      function move(e) {
+
+        box.style.top = e.pageY - x + "px";
+        box.style.left = e.pageX - y + "px";
+      };
+
+      // 注册鼠标弹起事件
+      document.onmouseup = function() {
+        // 移除2的动作
+        document.removeEventListener("mousemove", move);
+      };
+    });
+  </script>
+</html>
