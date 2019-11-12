@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .product {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .mask {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            width: 300px;
+            height: 300px;
+            background-color: #FEDE4F;
+            opacity: .5;
+        }
+        .big {
+            display: none;
+            position: absolute;
+            left: 510px;
+            top: 0;
+            width: 600px;
+            height: 600px;
+            overflow: hidden;
+        }
+        .big img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="product">
+        <img src="./images/sj-small.jpg" alt="">
+        <div class="mask"></div>
+        <div class="big">
+            <img src="./images/sj-big.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    var mask = document.querySelector('.mask');
+    var big = document.querySelector('.big');
+    var product = document.querySelector('.product');
+    product.addEventListener('mouseover',function() {
+        mask.style.display = 'block';
+        big.style.display = 'block';
+    })
+    product.addEventListener('mouseout', function() {
+        mask.style.display = 'none';
+        big.style.display = 'none';
+    })
+    product.addEventListener('mousemove', function(e) {
+        // 获取鼠标在盒子内部的坐标  用鼠标的坐标-盒子的偏移量 
+        var x = e.pageX - product.offsetLeft;
+        var y = e.pageY - product.offsetTop;
+        console.log(y);
+        
+        // 然后再把得到的坐标赋给 mask的偏移量
+        // 把光标定于mask中心 上移左移盒子的一般  减去
+        var maskX = x - mask.offsetWidth / 2;
+        var maskY = y - mask.offsetHeight / 2;
+        var maxMoveX = product.offsetWidth - mask.offsetWidth;
+        var maxMoveY = product.offsetHeight - mask.offsetHeight;
+        if(maskX <= 0) {
+            maskX = 0;
+        }else if(maskX >= maxMoveX) {
+            maskX = maxMoveX;
+        } //为啥不能连着写else if
+        if(maskY <= 0) {
+            maskY = 0;
+        }else if(maskY >= maxMoveY){
+            maskY = maxMoveY;
+        }
+        mask.style.left = maskX + 'px';
+        mask.style.top = maskY + 'px';
+        
+        // mask.style.top = 100 + 'px';
+        // 同时右边的大图的移动距离 需要按比例计算 =mask的移动距离*大图最大移动距离/mask的最大移动距离
+        // 获取大图
+        var bigImg = document.querySelector('.big > img');
+        var bigMaxX = bigImg.offsetWidth - big.offsetWidth;
+        var bigMaxY = bigImg.offsetHeight - big.offsetHeight;
+        // 按上面的公式计算
+        var bigX = maskX * bigMaxX / maxMoveX;
+        var bigY = maskY * bigMaxX / maxMoveY;
+        // 给大图的偏移量,记得大图要有定位 才能设置偏移量
+        bigImg.style.left = - bigX + 'px';
+        bigImg.style.top = - bigY + 'px';
+    })
+</script>
+</html>
