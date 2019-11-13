@@ -11,7 +11,9 @@
         padding: 0;
       }
       .box {
+        display: none;
         position: absolute;
+        z-index: 88;
         top: 30px;
         left: 50%;
         transform: translate(-50%);
@@ -20,9 +22,11 @@
         width: 400px;
         height: 200px;
         text-align: center;
+        background-color: #fff;
       }
       .box p {
         margin: 20px 0;
+        
       }
       .box h1 {
         cursor: move;
@@ -33,6 +37,25 @@
         width: 100px;
         height: 30px;
       }
+      body > p {
+        background-color: red;
+        text-align: center;
+      }
+      .box span {
+        display: block;
+        position: absolute;
+        right: -10px;
+        top: -5px;
+        width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      text-align: center;
+      color: #333;
+      background-color: #fff;
+      line-height: 20px;
+      cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -41,7 +64,9 @@
       <p>用户名：<input type="text" /></p>
       <p>密码： <input type="password" /></p>
       <button>登录会员</button>
+      <span>X</span>
     </div>
+    <p>点击弹出登录框</p>
   </body>
   <script>
     //       1 鼠标按下
@@ -54,7 +79,15 @@
     var h1 = document.querySelector("h1");
     var box = document.querySelector(".box");
     console.log(h1);
-
+    var open = document.querySelector('body>p');
+    var close = document.querySelector('.box>span');
+    console.log(close);
+    open.addEventListener('click', function() {
+      box.style.display = 'block';
+    })
+    close.addEventListener('click', function() {
+      box.style.display = 'none';
+    })
     // 选取标题部分作为可移动区域 注册鼠标按下事件
     h1.addEventListener('mousedown', function(e){
 
@@ -66,8 +99,8 @@
       
       function move(e) {
 
-        box.style.top = e.pageY - x + "px";
-        box.style.left = e.pageX - y + "px";
+        box.style.top = e.pageY - y + "px";
+        box.style.left = e.pageX - x + "px";
       };
 
       // 注册鼠标弹起事件
