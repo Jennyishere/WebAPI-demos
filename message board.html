@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: url(./images/bg.gif);
+        }
+        .clearfix:after {
+            content: '';
+            display: block;
+            overflow: hidden;
+            clear: both;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .board {
+            margin: 0px auto;
+            width: 940px;
+            height: 800px;
+            background: url(./images/content_bg.jpg);
+            /* overflow: hidden; */
+        }
+        .board .tip {
+            position: absolute;
+            float: left;
+            margin: 20px;
+        }
+        .board .top {
+            width: 227px;
+            background: url(./images/tip1_h.gif) no-repeat;
+            cursor: pointer;
+        }
+        .board .top .text {
+            float: left;
+            padding-left: 5px;
+            padding-top: 50px;
+            font-size: 12px;
+        }
+        .board .top .close {
+            float: right;
+            padding-top: 50px;
+            padding-right: 10px;
+            cursor: pointer;
+        }
+        .board .main {
+            margin-top: -3px;
+            width: 227px;
+            height: 120px;
+            background: url(./images/tip1_c.gif);
+            text-indent: 1em;
+            color: 12px;
+        }
+        .board .names {
+            width: 227px;
+            background: url(./images/tip1_f.gif);
+            height: 73px;
+
+        }
+        .board .names img {
+            float: left;
+        }
+        .board .names .who {
+            float: right;
+            padding: 0 10px;
+            
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="board">
+        <div class="tip">
+                <div class="top clearfix">
+                        <div class="text">第[49568]条 2016-02-17 22:51:52</div>
+                        <div class="close" title="关闭纸条">x</div>
+                    </div>
+                    <div class="main">努力学习，高薪就业</div>
+                    <div class="names clearfix">
+                        <img src="./images/bpic_1.gif" alt="">
+                        <div class="who">lby</div>
+                    </div>
+        </div>
+    </div>
+</body>
+<script>
+      var messages = [
+            {"id": 1, "name": "mahu", "content": "今天你拿苹果支付了么", "time": "2016-02-17 00:00:00"},
+            {"id": 2, "name": "haha", "content": "今天天气不错，风和日丽的", "time": "2016-02-18 12:40:00"},
+            {"id": 3, "name": "jjjj", "content": "常要说的事儿是乐生于苦", "time": "2016-03-18 12:40:00"},
+            {"id": 4, "name": "9.8的妹纸", "content": "把朋友家厕所拉堵了 不敢出去 掏了半小时了都", "time": "2016-03-18 12:40:00"},
+            {"id": 5, "name": "雷锋ii.", "content": "元宵节快乐", "time": "2016-02-22 12:40:00"},
+            {
+                "id": 6,
+                "name": "哎呦哥哥.",
+                "content": "据说今晚央视的元宵晚会导演和春晚导演是同一个人，真是躲得过初一，躲不过十五。",
+                "time": "2016-02-22 01:30:00"
+            },
+            {
+                "id": 7,
+                "name": "没猴哥，不春晚",
+                "content": "班主任:“小明，你都十二岁了，还是三年级，不觉得羞愧吗”？。小明:“一点也不觉得，老师你都四十多岁了，不也是年年在三年级混日子吗？羞愧的应该是你”。老师:……",
+                "time": "2016-02-22 01:30:00"
+            },
+            {"id": 8, "name": "哎呦杰杰.", "content": "真搞不懂你们地球人，月亮有什么好看的，全是坑，还是对面那哥们好看，", "time": "2016-02-22 01:30:00"},
+            {"id": 9, "name": "哎呦哎呦", "content": "今天哪里的烟花最好看！！？答：朋友圈。。。", "time": "2016-02-22 02:30:00"}
+        ];
+        var html = '';
+        var board = document.querySelector('.board');
+        for(var i = 0; i < messages.length; i++) {
+            var obj = messages[i];
+            html += '<div class=\"tip\">\n' +
+                '<div class=\"top clearfix\" title=\"双击删除\">\n' +
+                        '<div class=\"text\">第[4957' + obj.id +']条' + obj.time + '</div>\n' +
+                        '<div class=\"close\" title=\"关闭纸条\">x</div>' +
+                    '</div>\n' +
+                    '<div class=\"main\">' + obj.content + '</div>\n' +
+                    '<div class=\"names clearfix\">\n' +
+                        '<img src=\"./images/bpic_1.gif\" alt=\"\">\n' +
+                        '<div class=\"who\">' + obj.name + '</div>\n' +
+                    '</div>' +
+        '</div>';
+            board.innerHTML = html;
+            var tips = document.querySelectorAll('.tip');
+            var closes = document.querySelectorAll('.close');
+            var topclose = document.querySelectorAll('.top');
+            
+                // console.log(tips);
+                for(j = 0; j < tips.length; j++) {
+                    tips[j].style.left = Math.random() * 1000 + 'px';
+                    tips[j].style.top = Math.random() * 600 + 'px';
+                // 提高层级
+                    var maxIndex = 1;
+                    tips[j].onclick = function() {
+                        maxIndex++;
+                    this.style.zIndex = maxIndex; 
+                } 
+                    console.log(closes);
+
+                    closes[j].onclick = function(){
+                // 找到纸条，关闭纸条
+                // var tipdel = this.parentNode.parentNode;
+                // 删除纸条
+                board.removeChild(this.parentNode.parentNode);
+            }
+
+                topclose[j].ondblclick = function() {
+                    board.removeChild(this.parentNode);
+                }
+                    
+                }
+
+        }
+</script>
+</html>
