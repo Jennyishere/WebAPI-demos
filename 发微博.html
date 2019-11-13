@@ -51,14 +51,9 @@
        }
         
     
-    var as = document.querySelectorAll('ul a');
-    console.log(as);
-    
-    for(let i = 0; i < as.length; i ++) {
-        as[i].onclick = function() {
-            ul.removeChild(this.parentNode);
-}
-    }
+    ul.removeEventListener('click', function(e) {
+        if(e.target.nodeName)
+    }, false)
 }
 </script>
 </html>
