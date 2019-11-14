@@ -65,6 +65,13 @@ kits.removeRepeat = function(arr) {
   }
   return newArr;
 };
+// 数组去重
+kits.removeRepeatArray = function (arr) {
+  return arr.filter(function (item, index, self) {
+      return self.indexOf(item) === index;
+  });
+}
+
 //计算两个时间的间隔
 kits.getInterval = function(start, end) {
   var day, hour, minute, second, interval;
@@ -105,3 +112,27 @@ kits.getString = function(str) {
   }
   return [max,maxChar]
 };
+
+// 字符串去重
+kits.unique = function (str) {
+  var obj = {},
+  newstr = '',
+  for (var i = 0; i < str.length; i++) {
+    if (!obj[str[i]]) {
+        newstr += str[i];
+      obj[str[i]] = true;
+    }
+  }
+  return newstr;
+}
+字符串循环复制
+//repeatStr(str->字符串, count->次数)
+//ecDo.repeatStr('123',3)
+//"result：123123123"
+kits.repeatStr = function (str, count) {
+  var text = '';
+  for (var i = 0; i < count; i++) {
+      text += str;
+  }
+  return text;
+}
