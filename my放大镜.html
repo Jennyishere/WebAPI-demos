@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: relative;
+            top: 100px;
+            left: 100px;
+        }
+
+        .small {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+        }
+
+        .mask {
+            position: absolute;
+            background-color: rgba(255, 255, 0, .3);
+            width: 225px;
+            height: 225px;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .big {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #aaa;
+            position: absolute;
+            left: 500px;
+            top: 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big>img {
+            width: 900px;
+            height: 900px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="small">
+            <img src="./images/s.jpg" alt="">
+            <div class="mask"></div>
+        </div>
+        <div class="big">
+            <img src="./images/big.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        var small = document.querySelector('.small');
+        var mask = document.querySelector('.mask');
+        var big = document.querySelector('.big');
+        var img = document.querySelector('.big>img');
+        var box = document.querySelector('.box');
+        //简单鼠标移入易初的显示与隐藏
+        small.onmouseover = function () {
+            mask.style.display = 'block';
+            big.style.display = 'block';
+        }
+        small.onmouseout = function () {
+            mask.style.display = 'none';
+            big.style.display = 'none';
+        }
+
+
+        small.onmousemove = function (e) {
+            var mx = e.pageX;
+            var my = e.pageY;
+            var maskX = mx - box.offsetLeft - mask.offsetWidth/2;
+            var maskY = my - box.offsetTop - mask.offsetHeight/2;
+            maxX = small.offsetWidth - mask.offsetWidth;
+            maxY = small.offsetHeight - mask.offsetHeight;
+            console.log(maxX);
+            //控制mask在small里运动
+            if(maskX <= 0) {
+                maskX = 0;
+            }else if (maskX >= maxX) {
+                maskX = maxX;
+            }
+            if(maskY <= 0) {
+                maskY = 0;
+            }else if (maskY >= maxY) {
+                maskY = maxX;
+            }
+            mask.style.left = maskX + 'px';
+            mask.style.top = maskY + 'px';
+            //以下做大图的移动
+            //计算移动位置
+            /* maskX/maxX = imgX/imgMaxX */
+            var imgMaxX = img.offsetWidth -big.offsetWidth;
+            var imgMaxY = img.offsetHeight -big.offsetHeight;
+            var imgX = maskX * imgMaxX / maxX;
+            var imgY = maskY * imgMaxY / maxY;
+            //赋给大图的偏移量
+            img.style.left = -imgX + 'px';
+            img.style.top = -imgY + 'px';
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    用户名：<input type="text" /> <br />
+    电话：<input type="text" /><br />
+    个人描述： <input type="text" /><br />
+    爱好：<input type="text" /> <br />
+
+    <script>
+      var inputs = document.querySelectorAll("input");
+      for (i = 0; i < inputs.length; i++) {
+        inputs[i].keydown = function(e) {
+          e = e || window.event;
+          if (e.keyCode === 13) {
+            for (i = 0; i < inputs.length; i++) {
+                if (inputs[i] ===this) {
+                    var index = i + 1 >= inputs.length ? 0 : i + 1;
+                    break;
+                }
+            }
+            if (inputs[index].type === 'text') {
+                inputs[index].focus();
+            }
+          }9
+        };
+      }
+    </script>
+  </body>
+</html>

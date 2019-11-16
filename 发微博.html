@@ -34,26 +34,90 @@
    </ul>
 </body>
 <script>
+    
+    
     var btn = document.querySelector('button');
     var text = document.querySelector('textarea');
     var ul = document.querySelector('ul');
+
+    // 读取本地数据
+    var getData = localStorage.getItem('shuju');
+    console.log(getData);
+    //转换成数组对象  此时需要做一个数据是否为空的判断
+    var localData; 
+    if(getData == null) {
+        localData = []; //直接转为空数组
+    }else {
+        localData = JSON.parse(getData);  //不为空则用JSON转为数组对象再进行遍历
+    }
+    // console.log(localData);
+    // 遍历数组
+    localData.forEach(e => {
+        var li = document.createElement('li');
+        li.innerHTML = e.content + '<a href="javascript:;" data-id="' + e.id + '">删除</a>';
+        // ul.appendChild(li);
+        ul.insertBefore(li,ul.children[0]);
+    });
+    // let id;
+    
+    // var arr = []; 不能定义空数组 应存到本地数据的数组里
+    
     btn.onclick = function() {
-       if(text.value == '') {
+
+        let id = 0;
+    localData.forEach(function(e){
+      if(id < e.id){
+        id = e.id;
+      }
+    });
+    id++;
+    
+        var content = text.value;
+       if(content == '') {
         //    alert('请输入内容');
             btn.disabled;
            return;
        }else {
         var li = document.createElement('li');
-        li.innerHTML = text.value + '<a href="javascript:;">删除</a>';
+        li.innerHTML = content + '<a href="javascript:;" data-id="' + id + '">删除</a>';
         // ul.appendChild(li);
         ul.insertBefore(li,ul.children[0]);
         text.value = '';
        }
-        
+    //    建立数组储存数据
+    // id = 0;
+   
+   
+
+    var obj = {
+        id:id,
+        content : content,
+    }
+    // console.log(obj);
+    localData.push(obj);
+    console.log(localData);
+    // 把数据转换成json格式
+    var data = JSON.stringify(localData);
+    // console.log(data);
+    // 储存
+    localStorage.setItem('shuju',data);
     
-    ul.removeEventListener('click', function(e) {
-        if(e.target.nodeName)
-    }, false)
+    
 }
+ul.addEventListener('click', function(e) {
+        if(e.target.nodeName == 'A') {
+            ul.removeChild(e.target.parentNode);
+        }
+        // 拿到本地数据
+        let ziding = e.target.dataset.id;
+        console.log(ziding);
+        localData = localData.filter(function(e) {
+            return e.id != ziding;
+        })
+        console.log(localStorage);
+        var data = JSON.stringify(localData);
+        localStorage.setItem('shuju',data);
+    }, false)
+    
 </script>
 </html>

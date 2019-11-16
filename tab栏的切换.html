@@ -66,26 +66,47 @@
     </div>
 </body>
 <script>
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    })
     var topnav = document.querySelector('.topnav');
     var navli = topnav.querySelectorAll('li');
     console.log(navli);
     var details = document.querySelector('.details');
     var items = details.querySelectorAll('li');
-    for(let i = 0; i < navli.length; i++) {
-        navli[i].setAttribute('index',i);
-        navli[i].onclick = function() {
-            //排他
-        for(let i = 0; i < navli.length; i++) {
-            navli[i].className = '';
-        }
+    // for(let i = 0; i < navli.length; i++) {
+    //     navli[i].setAttribute('index',i);
+    //     navli[i].onclick = function() {
+    //         //排他
+    //     for(let i = 0; i < navli.length; i++) {
+    //         navli[i].className = '';
+    //     }
+    //     this.className = 'current';
+    //     var index = navli[i].getAttribute('index');
+    //     console.log(index);
+    //     for(let i = 0; i < navli.length; i++) {
+    //         items[i].style.display = 'none';
+    //     }
+    //         items[index].style.display = 'block';
+    //     }
+    // }
+    
+
+    // 用forEach更简单
+    navli.forEach(function(e,index) {
+        e.onclick = function () { 
+            navli.forEach(function(e,index) {
+            e.className = '';
+        })
         this.className = 'current';
-        var index = navli[i].getAttribute('index');
-        console.log(index);
-        for(let i = 0; i < navli.length; i++) {
-            items[i].style.display = 'none';
-        }
-            items[index].style.display = 'block';
-        }
-    }
+        items.forEach(function(e) {
+            e.style.display = 'none';
+
+        })
+        items[index].style.display = 'block';
+         }
+
+
+    })
 </script>
 </html>
